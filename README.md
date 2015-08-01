@@ -1,2 +1,2 @@
-# ArmAScriptsCompilation
-SomeScripts
+# ArmA Scripts Compilation
+Some Trash Scripts
