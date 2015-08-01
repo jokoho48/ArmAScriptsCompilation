@@ -1,2 +1,3 @@
 # ArmA Scripts Compilation
-Some Trash Scripts
+Some Scripts
+Feel Free to Do what ever you want with that stuff
