@@ -2,7 +2,6 @@ JK_maxInfDistance1 = 1500;
 JK_maxInfDistance2 = 3000;
 JK_LoopTime = 30;
 JK_cachedDebug = true;
-JK_usedDifferentGear = false;
 //#define JK_usedDifferentGear
 
 #include "fn_functions.sqf"
