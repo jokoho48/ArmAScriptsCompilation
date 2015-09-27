@@ -67,11 +67,10 @@ JK_fnc_cacheAll = {
     _var = format ["JK_CachedMarker_%1", JK_CachedMarker];
     _mrk = createMarkerLocal [_var, getPos _leader];
     JK_CachedMarker = JK_CachedMarker + 1;
-
-    _grpVariable = if (isNil {_grp getVariable ""}) then {
-        _grp getVariable ["JK_CachedUnits", []]
-    } else {
-        []
+    _grpVariable = _grp getVariable ["JK_CachedUnits", []];
+    _grpVariable = _grp getVariable ["JK_CachedUnits", []];
+     if (isNil "_grpVariable") then {
+        _grpVariable = []
     };
 
     {
