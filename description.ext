@@ -1,0 +1,3 @@
+disabledAI = 1;
+enableDebugConsole = 1;
+allowFunctionsLog = 1;
