@@ -1,7 +1,7 @@
 if (!isServer) exitWith {};
 JK_aiCacheDist = 2000;
 JK_aiUnCacheDist = 1500;
-JK_debug = (paramsArray select 1) isEqualTo 1;
+JK_debug = true;
 JK_cachedGroups = [];
 JK_currentIndex = -1;
 JK_maxIndex = 0;
