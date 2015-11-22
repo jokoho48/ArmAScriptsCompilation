@@ -20,7 +20,7 @@ JK_fnc_updateAllPlayers = {
         if (isUAVConnected _x) then {
             JK_allPlayers pushBack _x;
         };
-        if (_x getVariable ["JK_noCache", false]) then {
+        if !(_x getVariable ["JK_noCache", false]) then {
             _x setVariable ["JK_noCache", true];
         };
         nil
