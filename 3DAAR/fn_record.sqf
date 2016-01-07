@@ -8,16 +8,18 @@ JK_Hash = "";
 for "_i" from 1 to 5 do {
     JK_Hash = JK_Hash + str(floor(random 100));
 };
+[(JK_Hash + "JK_oldKeys"), str [], 0] spawn db_fnc_save;
+diag_log JK_Hash;
+hint str JK_Hash;
 JK_lastLoopisDone = true;
 JK_fnc_mainLoop = {
     private ["_key", "_data", "_scriptHandle", "_scriptHandleKeys", "_oldKeys"];
-    JK_lastLoopisDone = false;
     JK_Array = [];
     {
         private ["_tempArray"];
         _tempArray = [];
         {
-            if (isPlayer _x ||JK_AARisDebug) then {
+            if (isPlayer _x || JK_AARisDebug) then {
                 private ["_name", "_pos", "_dir", "_health", "_side"];
                 _name = name _x;
                 _pos = getPos _x;
@@ -26,9 +28,11 @@ JK_fnc_mainLoop = {
                 _side = side _x;
                 _tempArray pushBack [_name, _pos, _dir, _health, _side];
             };
-        } forEach units _x;
+            nil
+        } count units _x;
         JK_Array pushBack _tempArray;
-    } forEach allGroups;
+        nil
+    } count allGroups;
     _key = "";
     {
         _key = _key + str _x;
@@ -37,21 +41,22 @@ JK_fnc_mainLoop = {
     _key = _key + JK_Hash;
     _oldKeys = (JK_Hash + "JK_oldKeys") call db_fnc_load;
     _oldKeys pushBack _key;
-    _scriptHandleKeys = [(JK_Hash + "JK_oldKeys"), _oldKeys, 2] spawn db_fnc_save;
+    _scriptHandleKeys = [(JK_Hash + "JK_oldKeys"), str _oldKeys, 0] spawn db_fnc_save;
     _data = [time, JK_Array];
-    _scriptHandle = [_key, str _data, 1] spawn db_fnc_save;
-
-    waitUntil {scriptDone _scriptHandle};
-    waitUntil {scriptDone _scriptHandleKeys};
-    sleep 10;
-    JK_lastLoopisDone = true;
+    _scriptHandle = [_key, str _data, 0] spawn db_fnc_save;
+    //waitUntil {scriptDone _scriptHandleKeys && scriptDone _scriptHandle};
+    //sleep 10;
 };
 
 if (JK_3DAAR_Enabled) then {
-    [{
-        if !(JK_lastLoopisDone) exitWith {};
-        [] spawn JK_fnc_mainLoop;
-    }, 0, []] call CBA_fnc_addPerFrameHandler;
+    /*
+    [] spawn {
+        waitUntil {
+            call JK_fnc_mainLoop;
+            false
+        };
+    };*/
+    [JK_fnc_mainLoop, 10, []] call CBA_fnc_addPerFrameHandler;
 };
 
 JK_fnc_deleteOld = {
