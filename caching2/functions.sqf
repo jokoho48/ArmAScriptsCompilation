@@ -53,6 +53,7 @@ JK_fnc_setPosFull = {
         _testpos = (formationPosition _x);
         if (!(isNil "_testpos") && !(_testpos isEqualTo [])) then {
             if (!(isPlayer _x) && (vehicle _x isEqualTo _x)) then {
+                _testpos = [_testpos, 2, typeOf _x] call JK_fnc_findSavePos;
                 _testpos set [2,0];
                 _x setPos _testpos;
             };
@@ -65,4 +66,19 @@ JK_fnc_setPosFull = {
         };
         nil
     } count _toCache;
+};
+JK_fnc_findSavePos = {
+    params ["_pos", "_radius", "_type"];
+
+_retPos = if (isNil "_type") then {
+    _pos findEmptyPosition [0, _radius];
+} else {
+    _pos findEmptyPosition [0, _radius, _type];
+};
+
+if (_retPos isEqualTo []) exitWith {
+    [_pos, _radius + 10, _type] call SEN_fnc_findSavePosition;
+};
+
+_retPos
 };
