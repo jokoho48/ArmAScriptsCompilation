@@ -77,7 +77,7 @@ _retPos = if (isNil "_type") then {
 };
 
 if (_retPos isEqualTo []) exitWith {
-    [_pos, _radius + 10, _type] call SEN_fnc_findSavePosition;
+    [_pos, _radius + 10, _type] call JK_fnc_findSavePos;
 };
 
 _retPos
