@@ -70,15 +70,15 @@ JK_fnc_setPosFull = {
 JK_fnc_findSavePos = {
     params ["_pos", "_radius", "_type"];
 
-_retPos = if (isNil "_type") then {
-    _pos findEmptyPosition [0, _radius];
-} else {
-    _pos findEmptyPosition [0, _radius, _type];
-};
+    _retPos = if (isNil "_type") then {
+        _pos findEmptyPosition [0, _radius];
+    } else {
+        _pos findEmptyPosition [0, _radius, _type];
+    };
 
-if (_retPos isEqualTo []) exitWith {
-    [_pos, _radius + 10, _type] call JK_fnc_findSavePos;
-};
+    if (_retPos isEqualTo []) exitWith {
+        [_pos, _radius + 10, _type] call JK_fnc_findSavePos;
+    };
 
-_retPos
+    _retPos
 };
